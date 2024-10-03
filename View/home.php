@@ -1,5 +1,6 @@
 <?php
     include_once 'layout.php'
+    
 ?>
 <!doctype html>
 <html lang="en">
@@ -19,6 +20,7 @@
 
         <?php
         MostrarMenu();
+        
         ?>
 
         <div class="body-wrapper">
