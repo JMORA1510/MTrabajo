@@ -1,5 +1,5 @@
 <?php
-include_once '../Model/LoginModel.php'
+    include_once '../Model/LoginModel.php';
 
 if(isset($_POST["btnIniciarSesion"]))
 {
@@ -11,12 +11,22 @@ if(isset($_POST["btnIniciarSesion"]))
 
 if(isset($_POST["btnRegistrarUsuario"]))
 {
+
     $identificacion = $_POST["txtIdentificacion"];
     $nombre = $_POST["txtNombre"];
     $correo = $_POST["txtCorreo"];
     $contrasenna = $_POST["txtContrasenna"];
 
-    RegistrarUsuarioModel($identificacion,$nombre,$correo,$contrasenna);
+    $resultado = RegistrarUsuarioModel($identificacion,$nombre,$correo,$contrasenna);
+
+    if($resultado == true)
+    {
+        header("location: ../View/inicioSesion.php");
+    }
+    else
+    {
+        $_POST["txtMensaje"] = "Su informacion no se ha registrado correctamente."
+    }
 }
 
 if(isset($_POST["btnRecuperarAcceso"]))

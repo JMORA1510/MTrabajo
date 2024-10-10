@@ -11,6 +11,7 @@
     <title>Proyecto Web Miercoles</title>
     <link rel="shortcut icon" type="image/png" href="images/seodashlogo.png" />
     <link rel="stylesheet" href="css/styles.min.css" />
+    <link rel="stylesheet" href="css/sistema.css" />
 </head>
 
 <body>
@@ -28,6 +29,13 @@
                                     <img src="images/logo-light.svg" alt="">
                                 </a>
                                 <p class="text-center">Registro de Usuarios</p>
+
+                                <?php
+                                    if(isset($_POST["txtMensaje"]))
+                                    {
+                                        echo '<div class="alert alert-info Centrado">' . $_POST["txtMensaje"] . '</div>'
+                                    }
+                                ?>
                                 <form action="" method="POST">
                                     <div class="mb-3">
                                         <label for="exampleInputtext1" class="form-label">Identificacion</label>
