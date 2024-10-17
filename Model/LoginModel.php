@@ -5,7 +5,20 @@ function IniciarSesionModel($correo,$contrasenna)
 {
     $enlace = AbrirBD();
 
+    try
+    {
+    $enlace = AbrirBD();
 
+    $sentencia = "CALL IniciarSesion('$correo','$contrasenna')";
+    $resultado = $enlace -> query($sentencia);
+
+    CerrarBD($enlace);
+    return $resultado;
+    }
+    catch(Exception $e)
+    {
+        return null;
+    }
 
     CerrarBD($enlace);
 }

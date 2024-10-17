@@ -33,7 +33,7 @@
                                 <?php
                                     if(isset($_POST["txtMensaje"]))
                                     {
-                                        echo '<div class="alert alert-info Centrado">' . $_POST["txtMensaje"] . '</div>'
+                                        echo '<div class="alert alert-info Centrado">' . $_POST["txtMensaje"] . '</div>';
                                     }
                                 ?>
                                 <form action="" method="POST">
