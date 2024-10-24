@@ -1,53 +1,76 @@
 <?php
-include_once 'BaseDatos.php';
+    include_once $_SERVER["DOCUMENT_ROOT"] . '/Clase/Model/BaseDatos.php';
 
-function IniciarSesionModel($correo,$contrasenna)
-{
-    $enlace = AbrirBD();
-
-    try
+    function IniciarSesionModel($correo, $contrasenna)
     {
-    $enlace = AbrirBD();
+        try
+        {
+            $enlace = AbrirBD();
 
-    $sentencia = "CALL IniciarSesion('$correo','$contrasenna')";
-    $resultado = $enlace -> query($sentencia);
+            $sentencia = "CALL IniciarSesion('$correo','$contrasenna')";
+            $resultado = $enlace -> query($sentencia);
 
-    CerrarBD($enlace);
-    return $resultado;
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch(Exception $ex)
+        {
+            return null;
+        }
     }
-    catch(Exception $e)
+
+    function RegistrarUsuarioModel($identificacion,$nombre,$correo,$contrasenna)
     {
-        return null;
+        try
+        {
+            $enlace = AbrirBD();
+
+            $sentencia = "CALL RegistrarUsuario('$identificacion','$nombre','$correo','$contrasenna')";
+            $resultado = $enlace -> query($sentencia);
+
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch(Exception $ex)
+        {
+            return false;
+        }
     }
 
-    CerrarBD($enlace);
-}
-
-function RegistrarUsuarioModel($identificacion,$nombre,$correo,$contrasenna)
-{
-    try
+    function RecuperarAccesoModel($correo)
     {
-    $enlace = AbrirBD();
+        try
+        {
+            $enlace = AbrirBD();
 
-    $sentencia = "CALL RegistrarUsuario('$identificacion','$nombre','$correo','$contrasenna')";
-    $resultado = $enlace -> query($sentencia);
+            $sentencia = "CALL RecuperarAcceso('$correo')";
+            $resultado = $enlace -> query($sentencia);
 
-    CerrarBD($enlace);
-    return $resultado;
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch(Exception $ex)
+        {
+            return null;
+        }
     }
-    catch(Exception $e)
+
+    function ActualizarContrasennaModel($Consecutivo, $Codigo)
     {
-        return false;
+        try
+        {
+            $enlace = AbrirBD();
+
+            $sentencia = "CALL ActualizarContrasenna('$Consecutivo','$Codigo')";
+            $resultado = $enlace -> query($sentencia);
+
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch(Exception $ex)
+        {
+            return false;
+        }
     }
-}
-
-function RecuperarAccesoModel($correo)
-{
-    $enlace = AbrirBD();
-
-
-
-    CerrarBD($enlace);
-}
 
 ?>
