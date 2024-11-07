@@ -16,6 +16,8 @@
         {
             $datos = mysqli_fetch_array($resultado);
             $_SESSION["NombreUsuario"] = $datos["Nombre"];
+            $_SESSION["ConsecutivoUsuario"] = $datos["Consecutivo"];
+            $_SESSION["ConsecutivoRolUsuario"] = $datos["ConsecutivoRol"];
 
             header('location: ../../View/Login/home.php');
         }
@@ -82,7 +84,6 @@
         }
     }
 
-
     function GenerarCodigo() {
         $alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
         $pass = array();
@@ -93,7 +94,6 @@
         }
         return implode($pass);
     }
-
 
     function EnviarCorreo($asunto,$contenido,$destinatario)
     {

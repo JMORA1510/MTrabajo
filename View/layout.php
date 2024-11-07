@@ -28,21 +28,27 @@
                                     </span>
                                     <span class="hide-menu">Inicio</span>
                                 </a>
-                            </li>
-                            <li class="nav-small-cap">
-                                <i class="ti ti-dots nav-small-cap-icon fs-6"></i>
-                                <span class="hide-menu">Mantenimientos</span>
-                            </li>
-                            <li class="sidebar-item">
-                                <a class="sidebar-link" href="../Usuario/consultarUsuarios.php" aria-expanded="false">
-                                    <span>
-                                        <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6">
-                                        </iconify-icon>
-                                    </span>
-                                    <span class="hide-menu">Usuarios</span>
-                                </a>
-                            </li>
-                        </ul>
+                            </li>';
+
+                            if(isset($_SESSION["NombreUsuario"]) && $_SESSION["ConsecutivoRolUsuario"] == "1")
+                            {
+                                echo '
+                                    <li class="nav-small-cap">
+                                        <i class="ti ti-dots nav-small-cap-icon fs-6"></i>
+                                        <span class="hide-menu">Mantenimientos</span>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link" href="../Usuario/consultarUsuarios.php" aria-expanded="false">
+                                            <span>
+                                                <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6">
+                                                </iconify-icon>
+                                            </span>
+                                            <span class="hide-menu">Usuarios</span>
+                                        </a>
+                                    </li>';
+                            }
+                        
+                        echo '</ul>
                     </nav>
                 </div>
             </aside>
@@ -85,7 +91,7 @@
                                         if(isset($_SESSION["NombreUsuario"]))
                                         {
                                             echo '
-                                                <a href="javascript:void(0)"
+                                                 <a href="../Usuario/consultarPerfil.php"
                                                     class="d-flex align-items-center gap-2 dropdown-item">
                                                     <i class="ti ti-user fs-6"></i>
                                                     <p class="mb-0 fs-3">Mi Perfil</p>
