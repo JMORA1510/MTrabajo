@@ -35,9 +35,9 @@
         }
     }
 
-    function ConsultarUsuario()
+    function ConsultarUsuario($consecutivo)
     {
-        $resultado = ConsultarUsuarioModel($_SESSION["ConsecutivoUsuario"]);
+        $resultado = ConsultarUsuarioModel($consecutivo);
 
         if($resultado != null && $resultado -> num_rows > 0)
         {
@@ -53,7 +53,7 @@
 
     function ConsultarUsuarios()
     {
-        $resultado = ConsultarUsuariosModel();
+        $resultado = ConsultarUsuariosModel($_SESSION["ConsecutivoUsuario"]);
 
         if($resultado != null && $resultado -> num_rows > 0)
         {
@@ -67,7 +67,7 @@
         $nombre = $_POST["txtNombre"];
         $correo = $_POST["txtCorreo"];
 
-        $resultado = ActualizarPerfilModel($_SESSION["ConsecutivoUsuario"],$identificacion,$nombre,$correo);
+        $resultado = ActualizarPerfilModel($_SESSION["ConsecutivoUsuario"],$identificacion,$nombre,$correo,0);
         
         if($resultado == true)
         {
@@ -79,5 +79,52 @@
             $_POST["txtMensaje"] = "Su información no se ha actualizado correctamente";
         }
     }
+
+    if(isset($_POST["btnActualizarUsuario"]))
+    {
+        $consecutivo = $_POST["txtConsecutivo"];
+        $identificacion = $_POST["txtIdentificacion"];
+        $nombre = $_POST["txtNombre"];
+        $correo = $_POST["txtCorreo"];
+        $rol = $_POST["ddlRoles"];
+
+        $resultado = ActualizarPerfilModel($consecutivo,$identificacion,$nombre,$correo,$rol);
+        
+        if($resultado == true)
+        {
+            header('location: ../../View/Usuario/consultarUsuarios.php');
+        }
+        else
+        {
+            $_POST["txtMensaje"] = "No fue posible actualizar la información del usuario";
+        }
+    }
+
+    if(isset($_POST["btnCambiarEstadoUsuario"]))
+    {
+        $consecutivo = $_POST["txtConsecutivo"];
+
+        $resultado = CambiarEstadoUsuarioModel($consecutivo);
+        
+        if($resultado == true)
+        {
+            header('location: ../../View/Usuario/consultarUsuarios.php');
+        }
+        else
+        {
+            $_POST["txtMensaje"] = "No fue posible actualizar el estado del usuario";
+        }
+    }
+
+    function ConsultarRoles()
+    {
+        $resultado = ConsultarRolesModel();
+
+        if($resultado != null && $resultado -> num_rows > 0)
+        {
+            return $resultado;
+        }
+    }
+    
 
 ?>

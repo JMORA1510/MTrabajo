@@ -19,13 +19,13 @@
         }
     }
 
-    function ConsultarUsuariosModel()
+    function ConsultarUsuariosModel($consecutivo)
     {
         try
         {
             $enlace = AbrirBD();
 
-            $sentencia = "CALL ConsultarUsuarios()";
+            $sentencia = "CALL ConsultarUsuarios('$consecutivo')";
             $resultado = $enlace -> query($sentencia);
 
             CerrarBD($enlace);
@@ -37,13 +37,13 @@
         }
     }
 
-    function ActualizarPerfilModel($consecutivo,$identificacion,$nombre,$correo)
+    function ActualizarPerfilModel($consecutivo,$identificacion,$nombre,$correo,$rol)
     {
         try
         {
             $enlace = AbrirBD();
 
-            $sentencia = "CALL ActualizarPerfil('$consecutivo','$identificacion','$nombre','$correo')";
+            $sentencia = "CALL ActualizarPerfil('$consecutivo','$identificacion','$nombre','$correo','$rol')";
             $resultado = $enlace -> query($sentencia);
 
             CerrarBD($enlace);
@@ -52,6 +52,42 @@
         catch(Exception $ex)
         {
             return false;
+        }
+    }
+
+    function CambiarEstadoUsuarioModel($consecutivo)
+    {
+        try
+        {
+            $enlace = AbrirBD();
+
+            $sentencia = "CALL CambiarEstadoUsuario('$consecutivo')";
+            $resultado = $enlace -> query($sentencia);
+
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch(Exception $ex)
+        {
+            return false;
+        }
+    }
+
+    function ConsultarRolesModel()
+    {
+        try
+        {
+            $enlace = AbrirBD();
+
+            $sentencia = "CALL ConsultarRoles()";
+            $resultado = $enlace -> query($sentencia);
+
+            CerrarBD($enlace);
+            return $resultado;
+        }
+        catch(Exception $ex)
+        {
+            return null;
         }
     }
 

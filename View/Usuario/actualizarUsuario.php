@@ -2,7 +2,7 @@
     include_once $_SERVER["DOCUMENT_ROOT"] . '/Clase/View/layout.php';
     include_once $_SERVER["DOCUMENT_ROOT"] . '/Clase/Controller/UsuarioController.php';
 
-    $id = $_SESSION["ConsecutivoUsuario"];
+    $id = $_GET["id"];
     $datos = ConsultarUsuario($id);
 ?>
 
@@ -36,7 +36,7 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-4">Mi Perfil</h5>
+                            <h5 class="card-title fw-semibold mb-4">Actualizar Usuario</h5>
 
                             <?php
                                 if(isset($_POST["txtMensaje"]))
@@ -46,6 +46,8 @@
                             ?>
 
                             <form action="" method="POST">
+
+                                <input type="hidden" id="txtConsecutivo" name="txtConsecutivo" value="<?php echo $datos["Consecutivo"] ?>">
 
                                 <div class="mb-3">
                                     <label class="form-label">Identificación</label>
@@ -67,13 +69,29 @@
 
                                 <div class="mb-4">
                                     <label class="form-label">Rol</label>
-                                    <input type="text" class="form-control" id="txtRol" name="txtRol" readOnly="true"
-                                    style="background-color:#f1f1f1"
-                                    value="<?php echo $datos["NombreRol"] ?>">
+                                    <select id="ddlRoles" name="ddlRoles" class="form-control">
+                                    
+                                    <?php
+                                        $roles = ConsultarRoles();
+                                        echo "<option value=''> Seleccione </option>";                                        
+                                        While($fila = mysqli_fetch_array($roles))
+                                        {
+                                            if($fila["Consecutivo"] == $datos["ConsecutivoRol"])
+                                            {
+                                                echo "<option selected value=" . $fila["Consecutivo"] . ">" . $fila["NombreRol"] . "</option>";
+                                            }
+                                            else
+                                            {
+                                                echo "<option value=" . $fila["Consecutivo"] . ">" . $fila["NombreRol"] . "</option>";
+                                            }                                            
+                                        }
+                                    ?>
+                                
+                                    </select>
                                 </div>
 
-                                <input type="submit" class="btn btn-primary" value="Procesar" id="btnActualizarPerfil"
-                                    name="btnActualizarPerfil">
+                                <input type="submit" class="btn btn-primary" value="Procesar" id="btnActualizarUsuario"
+                                    name="btnActualizarUsuario">
 
                             </form>
                         </div>
