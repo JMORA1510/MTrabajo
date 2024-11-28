@@ -11,7 +11,7 @@
             <aside class="left-sidebar">
                 <div>
                     <div class="brand-logo d-flex align-items-center justify-content-between">
-                        <a href="home.php" class="text-nowrap logo-img">
+                        <a href="../Login/home.php" class="text-nowrap logo-img">
                             <img src="../images/logo-light.svg" alt="" />
                         </a>
                         <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -40,6 +40,15 @@
                                                 </iconify-icon>
                                             </span>
                                             <span class="hide-menu">Usuarios</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link" href="../Producto/consultarProductos.php" aria-expanded="false">
+                                            <span>
+                                                <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6">
+                                                </iconify-icon>
+                                            </span>
+                                            <span class="hide-menu">Productos</span>
                                         </a>
                                     </li>';
                             }
@@ -117,6 +126,35 @@
                     </div>
                 </nav>
             </header>
+        ';
+    }
+
+    function ReferenciasCSS()
+    {
+        echo '
+            <head>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <title>Proyecto Web Miércoles</title>
+                <link rel="shortcut icon" type="image/png" href="../images/seodashlogo.png" />
+                <link rel="stylesheet" href="../css/styles.min.css" />
+                <link rel="stylesheet" href="../css/sistema.css" />
+                <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css" />
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+            </head>';
+    }
+
+    function ReferenciasJS()
+    {
+        echo '
+            <script src="../js/jquery.min.js"></script>
+            <script src="../js/bootstrap.bundle.min.js"></script>
+            <script src="../js/simplebar.js"></script>
+            <script src="../js/sidebarmenu.js"></script>
+            <script src="../js/app.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+            <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+            <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
         ';
     }
 

@@ -1,20 +1,17 @@
 <?php
     include_once $_SERVER["DOCUMENT_ROOT"] . '/Clase/View/layout.php';
+    include_once $_SERVER["DOCUMENT_ROOT"] . '/Clase/Controller/ProductoController.php';
 ?>
 
 <!doctype html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Proyecto Web Miércoles</title>
-    <link rel="shortcut icon" type="image/png" href="../images/seodashlogo.png" />
-    <link rel="stylesheet" href="../css/styles.min.css" />
-</head>
+<?php
+    ReferenciasCSS();
+?>
 
-<body>
-    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+<body class="page-wrapper">
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
 
         <?php
@@ -37,16 +34,59 @@
                         }
                     ?>
 
+                    <?php
+                            $datos = ConsultarProductos();
+                            While($fila = mysqli_fetch_array($datos))
+                            {
+                                echo '
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="card">
+                                        <div style="text-align:center">
+                                            <img class="card-img-top" src="' . $fila["Imagen"] . '" style="width:175px; height:150px; margin-top:20px">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">' . $fila["Nombre"] . '</h5>
+
+                                            Unidades: ' . $fila["Cantidad"] . ' <br/>
+                                            Precio: ¢' . number_format($fila["Precio"],2) . '
+
+                                            <br/><br/>
+                                            <textarea class="form-control" style="resize:none; border:0px; text-align:justify; padding: 0px 10px 0px 0px;" rows="5">' . $fila["Descripcion"] . '</textarea>
+                                            <br/>';
+
+                                            if(isset($_SESSION["NombreUsuario"]))
+                                            {
+                                                echo 
+                                                '<div class="row">
+                                                    <div class="col-6">
+                                                        <input id='. $fila["Consecutivo"] . ' type="number" class="form-control" style="text-align:center" 
+                                                        onkeypress="return SoloNumeros(event)" value="0" min="1" max=' . $fila["Cantidad"] . '>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <a onclick="RegistrarCarritoJS(' . $fila["Consecutivo"] .', ' . $fila["Cantidad"] .');" style="width:100%" class="btn btn-primary">+ Añadir</a>
+                                                    </div>
+                                                </div>';                                             
+                                            }
+
+                                            echo '</div>
+
+                                    </div>
+                                </div>
+                                ';
+                            }
+                        ?>
+
                 </div>
             </div>
         </div>
     </div>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.bundle.min.js"></script>
-    <script src="../js/simplebar.js"></script>
-    <script src="../js/sidebarmenu.js"></script>
-    <script src="../js/app.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
+    <?php
+        ReferenciasJS();
+    ?>
+    <script src="../js/Comunes.js"></script>
+    <script src="../js/RegistrarCarrito.js"></script>
+
 </body>
 
 </html>
