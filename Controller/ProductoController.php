@@ -31,10 +31,10 @@
         $descripcion = $_POST["txtDescripcion"];
         $precio = $_POST["txtPrecio"];
         $cantidad = $_POST["txtCantidad"];
-        $imagen = '/View/products_images/' . $_FILES["txtImagen"]["name"];
+        $imagen = 'Clase/View/products_images/' . $_FILES["txtImagen"]["name"];
 
         $origen = $_FILES["txtImagen"]["tmp_name"];
-        $destino = $_SERVER["DOCUMENT_ROOT"] . '/View/products_images/' .  $_FILES["txtImagen"]["name"];
+        $destino = $_SERVER["DOCUMENT_ROOT"] . 'Clase/View/products_images/' .  $_FILES["txtImagen"]["name"];
         copy($origen,$destino);
 
         $resultado = RegistrarProductoModel($nombre,$descripcion,$precio,$cantidad,$imagen);

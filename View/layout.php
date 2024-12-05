@@ -1,8 +1,14 @@
 <?php
     include_once $_SERVER["DOCUMENT_ROOT"] . '/Clase/Controller/LoginController.php';
+    include_once $_SERVER["DOCUMENT_ROOT"] . '/Clase/Controller/CarritoController.php';
 
     if(session_status() == PHP_SESSION_NONE) {
         session_start();
+    }
+
+    if(isset($_SESSION["NombreUsuario"]))
+    {
+        ConsultarResumenCarrito();
     }
 
     function MostrarMenu()
@@ -52,6 +58,30 @@
                                         </a>
                                     </li>';
                             }
+                            
+                            if(isset($_SESSION["NombreUsuario"]))
+                            {
+                                echo '
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link" href="../Carrito/consultarCarrito.php" aria-expanded="false">
+                                            <span>
+                                                <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6">
+                                                </iconify-icon>
+                                            </span>
+                                            <span class="hide-menu">Mi Carrito</span>
+                                        </a>
+                                    </li>
+                                     <li class="sidebar-item">
+                                        <a class="sidebar-link" href="../Carrito/consultarCompras.php" aria-expanded="false">
+                                            <span>
+                                                <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6">
+                                                </iconify-icon>
+                                            </span>
+                                            <span class="hide-menu">Mis Compras</span>
+                                        </a>
+                                    </li>';
+                            }
+
                         
                         echo '</ul>
                     </nav>
@@ -66,6 +96,8 @@
         if(isset($_SESSION["NombreUsuario"]))
         {
             $usuario = $_SESSION["NombreUsuario"];
+            $cantidad = $_SESSION["CantidadCarrito"];
+            $total = $_SESSION["TotalCarrito"];
         }
 
         echo '
@@ -79,6 +111,10 @@
                             </a>
                         </li>
                     </ul>
+
+                    <i class="fa fa-tags" style="margin-right:10px;"></i>'. $cantidad .'
+                    <i class="fa fa-credit-card" style="margin-left:10px; margin-right:10px;"></i>¢ '. number_format($total,2) .'
+
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
                         <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
                         ' . $usuario . '
@@ -141,6 +177,7 @@
                 <link rel="stylesheet" href="../css/sistema.css" />
                 <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css" />
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.min.css" />
             </head>';
     }
 
@@ -155,6 +192,7 @@
             <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
             <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
             <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.all.min.js"></script>
         ';
     }
 

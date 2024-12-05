@@ -4,13 +4,13 @@ $(document).ready(function() {
         language: {
             url: '../js/es-ES.json'
         },
-        columnDefs: [{ type:"string", target: [0,1,2,3,4,5]}]
+        columnDefs: [{ type:"string", target: [0,1,2,3]}]
     });
 
 });
 
 $(document).on("click", "#btnOpenModal", function(){
 
-    $("#txtConsecutivo").val($(this).attr('data-id'));
-    $("#lblNombre").text($(this).attr('data-name'));
+    $("#txtConsecutivoProducto").val($(this).attr('data-id'));
+    $("#lblNombreProducto").text($(this).attr('data-name'));
 });
